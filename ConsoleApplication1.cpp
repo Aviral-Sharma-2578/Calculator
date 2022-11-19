@@ -1,6 +1,3 @@
-// ConsoleApplication1.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
 using namespace std;
 
@@ -13,6 +10,35 @@ double pow(double x, int y)
 	}
 	return c;
 }
+
+double fact(int n) {
+	double ans = 1;
+	for (int i = 1; i <= n; i++) {
+		ans *= i;
+	}
+	return ans;
+}
+
+double sin(double x) {
+	double ans = 0.0;
+	int a = 1;
+	for (int i = 1; i < 80; i++) {
+		ans += (pow(x, (2 * i - 1)) / fact(2 * i - 1)) * a;
+		a = a * -1;
+	}
+	return ans;
+}
+
+double cos(double x) {
+	double ans = 0.0;
+	int a = 1;
+	for (int i = 1; i < 80; i++) {
+		ans += (pow(x, (2 * i - 2)) / fact(2 * i - 2)) * a;
+		a = a * -1;
+	}
+	return ans;
+}
+
 
 int main()
 {
@@ -83,8 +109,7 @@ int main()
 		cout << "Enter a real number(angle in radians) ";
 		double x;
 		cin >> x;
-		double ans = (16 * x * (3.141592654 - x)) / (5 * 3.141592654 * 3.14159 - 4 * x * (3.141592654 - x)); //Bhaskara I approximation
-		cout << "The sine is " << ans;
+		cout << sin(x);
 	}
 
 	else if (in == 7)
@@ -92,8 +117,7 @@ int main()
 		cout << "Enter a real number(angle in radians) ";
 		double x;
 		cin >> x;
-		double ans = (3.141592654*3.141592654 - 4*x*x)/(3.141592654 * 3.141592654 + x*x); //Bhaskara I approximation
-		cout << "The cosine is " << ans;
+		cout << cos(x);
 	}
 
 	else if (in == 8)
@@ -101,16 +125,7 @@ int main()
 		cout << "Enter a real number(angle in radians) ";
 		double x;
 		cin >> x;
-		if (x * x <= 1)
-		{
-			double ans = x + (pow(x, 3) / 3) + (2 * pow(x, 5) / 15) + (17 * pow(x, 7) / 315); //Maclaurin series
-			cout << "The tangent is " << ans;
-		}
-		else
-		{
-			double ans = 1.57 - (1 / x) + (1 / (3 * pow(x, 3))) - (1 / (5 * pow(x, 5)));
-			cout << "The tangent is " << ans;
-		}
+		cout << sin(x) / cos(x);
 	}
 
 	else
@@ -122,16 +137,3 @@ int main()
 
 	return 0;
 }
-
-
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
